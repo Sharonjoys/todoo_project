@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="banner">
+                <div class="banner-text">
+                    <h1>To Do</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+ <div class="container">
+     <div class="row">
+         <div class="col-md-6">
+      <form method="POST" class="p-3 shadow">
+          {% csrf_token %}
+        <div class="form-group">
+            <input type="text" class="form-control" name="task" placeholder="Enter Task">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" name="priority" placeholder="Enter Priority">
+        </div>
+           <div class="form-group">
+            <input type="date" class="form-control" name="date" placeholder="Enter the date">
+        </div>
+
+
+       <input type="submit" class="btn btn-success">
+      </form>
+         </div>
+
+
+         <br>
+
+         <div class="col-md-6">
+             <h1>tasks to be completed</h1>
+             {% for i in det %}
+             <div class="shadow card " style="width: 18rem;">
+               <div class="card-body">
+                   <h5 class="card-title">{{i.name}}</h5>
+                   <p class="card-text">{{i.priority}}</p>
+                   <p class="card-text">{{i.date}}</p>
+                   <a href="{% url 'delete' i.id %}" class="btn btn-danger">delete</a><br>
+                   <a href="{% url 'edit' i.id %}" class="btn btn-warning">update</a>
+                   <a href="{% url 'cbvupdate' i.id %}" class="btn btn-info">class update</a>
+               </div>
+             </div>
+             <br>
+              {% endfor %}
+         </div>
+     </div>
+ </div>
+
+
+
+
+
+{% endblock %}
